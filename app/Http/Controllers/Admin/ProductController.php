@@ -129,11 +129,22 @@ class ProductController extends Controller
     }
 
     public function delete($id){
+        // $product = Product::withTrashed()->findOrFail($id);
         $product = Product::findOrFail($id);
         if($product->forceDelete()){
             return redirect()->back()->with(['status' => 'success', 'message' => 'Product record has been deleted successfully.']);
         }else{
             return redirect()->back()->with(['status' => 'error', 'message' => 'Product record has not been deleted successfully.']);
+        }
+    }
+
+    public function trashRemove($id){
+        $product = Product::withTrashed()->findOrFail($id);
+
+        if($product->forceDelete()){
+            return redirect()->back()->with(['status' => 'success', 'message' => 'Product record has been removed successfully.']);
+        }else{
+            return redirect()->back()->with(['status' => 'error', 'message' => 'Product record has not been removed successfully.']);
         }
     }
 

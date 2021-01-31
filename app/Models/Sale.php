@@ -24,10 +24,28 @@ class Sale extends Model
         'transaction_id',
         'note',
     ];
+
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function customer(){
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
 
 
 
+
+// One To One  => hasOne() => belongsTo()
+
+// One To Many => hasMany() => belongsTo()
+
+// Many To Many => belongsToMany() => belongsToMany()
 
 
 

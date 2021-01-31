@@ -120,10 +120,10 @@
                                             <td>{{ $product->status }}</td>
                                             <td width="300px">
                                                 <a href="{{ route('admin.product.restore', $product->id) }}" class="btn btn-info btn-edit" title="RE STORE"><i class="fas fa-plus"></i></a>                                                                                        
-                                                <a href="{{ route('admin.product.delete', $product->id) }}" class="btn btn-danger btn-delete" title="DELETE" onclick="event.preventDefault(); document.getElementById('delete-product-{{$product->id}}').submit();">
+                                                <a href="{{ route('admin.product.remove', $product->id) }}" class="btn btn-danger btn-delete" title="DELETE" onclick="event.preventDefault(); document.getElementById('remove-product-{{$product->id}}').submit();">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                                <form id="delete-product-{{ $product->id }}" action="{{ route('admin.product.delete', $product->id) }}" method="POST" class="d-none">
+                                                <form id="remove-product-{{ $product->id }}" action="{{ route('admin.product.remove', $product->id) }}" method="POST" class="d-none">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

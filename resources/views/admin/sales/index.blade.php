@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">All Purchases</h1>
+                    <h1 class="m-0 text-dark">All Sales</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">All Purchases</li>
+                        <li class="breadcrumb-item active">All Sales</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">All Purchase List</h3>
+                            <h3 class="card-title">All Sale List</h3>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped" role="grid" aria-describedby="example1_info">
@@ -34,36 +34,37 @@
                                     <tr>
                                         <th>Sl#</th>
                                         <th>Product Name</th>
-                                        <th>Supplier Name</th>
+                                        <th>Customer Name</th>
                                         <th>Total Quantity</th>
+                                        <th>Sale Price</th>
                                         <th>Total Amount</th>
-                                        <th>Unit Price</th>
                                         <th>Transaction Type</th>
                                         <th>Paid Amount</th>
                                         <th>Due Amount</th>
-                                        <th>Purchase Date</th>
+                                        <th>Sales Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($purchases as $purchase)
+                                    @foreach ($sales as $sale)
+                                    {{ dd($sale) }}
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $purchase->product->name }}</td>
-                                            <td>{{ $purchase->supplier->name }}</td>
-                                            <td>{{ $purchase->total_quantity }}</td>
-                                            <td>{{ $purchase->total_amount }}</td>
-                                            <td>{{ $purchase->unit_price }}</td>
-                                            <td>{{ $purchase->transaction_type }}</td>
-                                            <td>{{ $purchase->paid_amount }}</td>
-                                            <td>{{ $purchase->due_amount }}</td>
-                                            <td>{{ $purchase->purchase_date }}</td>
+                                            <td>{{ $sale->product->name }}</td>
+                                            <td>{{ $sale->customer->name }}</td>
+                                            <td>{{ $sale->total_quantity }}</td>
+                                            <td>{{ $sale->sale_price }}</td>
+                                            <td>{{ $sale->total_amount }}</td>
+                                            <td>{{ $sale->transaction_type }}</td>
+                                            <td>{{ $sale->paid_amount }}</td>
+                                            <td>{{ $sale->due_amount }}</td>
+                                            <td>{{ $sale->created_at }}</td>
                                             <td width="300px">
-                                                <a href="{{ route('admin.purchase.edit', $purchase->id) }}" class="btn btn-info btn-edit" title="EDIT"><i class="fas fa-edit"></i></a>                                                                                            
-                                                <a href="{{ route('admin.purchase.delete', $purchase->id) }}" class="btn btn-danger btn-delete" title="DELETE" onclick="event.preventDefault(); document.getElementById('delete-purchase-{{$purchase->id}}').submit();">
+                                                <a href="{{ route('admin.sale.edit', $sale->id) }}" class="btn btn-info btn-edit" title="EDIT"><i class="fas fa-edit"></i></a>                                                                                            
+                                                <a href="{{ route('admin.sale.delete', $sale->id) }}" class="btn btn-danger btn-delete" title="DELETE" onclick="event.preventDefault(); document.getElementById('delete-sale-{{$sale->id}}').submit();">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                                <form id="delete-purchase-{{ $purchase->id }}" action="{{ route('admin.purchase.delete', $purchase->id) }}" method="POST" class="d-none">
+                                                <form id="delete-sale-{{ $sale->id }}" action="{{ route('admin.sale.delete', $sale->id) }}" method="POST" class="d-none">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
@@ -82,7 +83,7 @@
                                         <th>Transaction Type</th>
                                         <th>Paid Amount</th>
                                         <th>Due Amount</th>
-                                        <th>Purchase Date</th>
+                                        <th>Sale Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

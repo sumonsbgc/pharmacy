@@ -80,6 +80,7 @@ Route::prefix('admin')->group(function(){
     Route::put('product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::delete('product/trash/{id}', [ProductController::class, 'trash'])->name('admin.product.trash');
     Route::get('product/restore/{id}', [ProductController::class, 'restore'])->name('admin.product.restore');
+    Route::delete('product/remove/{id}', [ProductController::class, 'trashRemove'])->name('admin.product.remove');
     Route::delete('product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
     // All Suppliers Routes

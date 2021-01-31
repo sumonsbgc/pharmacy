@@ -20,14 +20,14 @@ class CreateSalesTable extends Migration
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('customer_id')->constrained('customers');
             
-            $table->integer('quantity');
-            $table->decimal('sales_price', 8, 2);
-            $table->decimal('total_amount', 8, 2);
-
             $table->enum('sales_type', ['Cash', 'Cheque', 'Due', 'Mobile Banking']);
             
-            $table->decimal('paid_amount', 8, 2);
-            $table->decimal('due_amount', 8, 2)->nullable();
+            $table->decimal('gross_amount', 8, 2);
+            $table->decimal('discount_amount', 8, 2)->nullable()->default(0);
+            $table->decimal('net_amount', 8, 2);
+
+            $table->decimal('paid_amount', 8, 2)->default(0)->nullable();
+            $table->decimal('due_amount', 8, 2)->nullable()->default(0);
             $table->date('pay_back_date')->nullable();
             $table->string('transaction_id')->nullable();
             $table->timestamps();

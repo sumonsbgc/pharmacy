@@ -19,23 +19,37 @@
     <section class="content">
         <div class="container-fluid">
 
+            {{-- @if($errors->any())
+            <div class="row mb-2">
+                <div class="col-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif --}}
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Sale</h3>
+                            <h3 class="card-title">Add New Sale</h3>            5
                         </div>                    
                         <div class="card-body">
                             <form action="{{ route('admin.sale.store') }}" class="" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 {{-- Product --}}
                                 <div class="row mb-4">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="product_id" class="form-label">Product Name <small class="text-danger">*</small></label>
-                                        <select name="product_id" id="product_id" class="form-control select2">
+                                        <select name="product_id" id="product_id" class="form-control select2" multiple>
                                             <option value="">Please select a product</option>
                                             @foreach ($products as $product)
-                                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('product_id')
@@ -46,7 +60,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="sales_price" class="form-label">Sale Price (Per Unit) <small class="text-danger">*</small></label>
-                                        <input type="number" name="sales_price" id="sales_price" class="form-control @error('sales_price') is-invalid @enderror" placeholder="Sale Price">
+                                        <input type="number" name="sales_price" value="{{ old('sales_price') }}" id="sales_price" class="form-control @error('sales_price') is-invalid @enderror" placeholder="Sale Price" min="0">
                                         @error('sales_price')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -55,21 +69,25 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="quantity" class="form-label">Total Quantity <small class="text-danger">*</small></label>
-                                        <input type="number" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Quantity">
+                                        <input type="number" name="quantity" value="{{ old('quantity') }}" id="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Quantity" min="0">
                                         @error('quantity')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="total_amount" class="form-label">Total Amount <small class="text-danger">*</small></label>
-                                        <input type="number" name="total_amount" id="total_amount" class="form-control @error('total_amount') is-invalid @enderror" placeholder="Total amount">
+                                        <input type="number" name="total_amount" value="{{ old('total_amount') }}" id="total_amount" class="form-control @error('total_amount') is-invalid @enderror" placeholder="Total amount" min="0">
                                         @error('total_amount')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="" class="form-label"></label>
+                                        <button class="btn btn-primary mt-4"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
 
@@ -81,9 +99,10 @@
                                         <select name="transaction_type" id="transaction_type" class="form-control select2" required>
                                             <option value="">Select a Transaction Type</option>
                                             @foreach ($trnx_types as $type)
-                                                <option value="{{ $type }}">{{ $type }}</option>
+                                                <option value="{{ $type }}" {{ old('transaction_type') === $type ? 'selected' : '' }}>{{ $type }}</option>
                                             @endforeach
                                         </select>
+                                        
                                         @error('transaction_type')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -92,7 +111,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="paid_amount" class="form-label">Paid Amount</label>
-                                        <input type="number" name="paid_amount" id="paid_amount" class="form-control @error('paid_amount') is-invalid @enderror" placeholder="Paid amount">
+                                        <input type="number" name="paid_amount" value="{{ old('paid_amount') }}" id="paid_amount" class="form-control @error('paid_amount') is-invalid @enderror" placeholder="Paid amount" min="0">
                                         @error('paid_amount')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -105,7 +124,7 @@
                                 <div class="row mb-4 d-none" id="due_sales_info_row">
                                     <div class="col-md-6">
                                         <label for="due_amount" class="form-label">Due Amount </label>
-                                        <input type="number" name="due_amount" id="due_amount" class="form-control @error('due_amount') is-invalid @enderror" placeholder="Due amount">
+                                        <input type="number" name="due_amount" id="due_amount" value="{{ old('due_amount') }}" class="form-control @error('due_amount') is-invalid @enderror" placeholder="Due amount" min="0" readonly>
                                         @error('due_amount')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -129,7 +148,7 @@
                                 <div class="row mb-4">
 
                                     <div class="col-md-12 mb-2">
-                                        <label for="new_customer" class="form-label"><input type="checkbox" id="new_customer" name="is_new_customer"> New Customer</label>
+                                        <label for="is_new_customer" class="form-label"><input type="checkbox" id="is_new_customer" name="is_new_customer" {{ !empty(old('is_new_customer')) ? 'checked' : '' }}> New Customer</label>
                                     </div>
 
                                     <div class="col-md-12" id="old-customer-fields">
@@ -137,7 +156,7 @@
                                         <select name="customer_id" id="customer_id" class="form-control select2">
                                             <option value="">Please select a supplier</option>
                                             @foreach ($customers as $customer)
-                                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                                <option value="{{ $customer->id }}" {{ old('customer_id') === $customer->id ? 'selected' : '' }}>{{ $customer->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('customer_id')
@@ -197,7 +216,7 @@
                                 <div class="row mb-4 d-none" id="transaction_id_row">
                                     <div class="col-md-12">
                                         <label for="transaction_id" class="form-label">Transaction Id</label>
-                                        <input type="number" name="transaction_id" id="transaction_id" class="form-control @error('transaction_id') is-invalid @enderror" placeholder="Transaction ID">
+                                        <input type="text" name="transaction_id" id="transaction_id" value="{{ old('transaction_id') }}" class="form-control @error('transaction_id') is-invalid @enderror" placeholder="Transaction ID">
                                         @error('transaction_id')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -226,35 +245,6 @@
     <script>
         ;(function($){
             $(document).ready(function(){
-
-                $('#transaction_type').on('change', function(e){
-                    var trx_type = e.target.value;
-                    if(trx_type == 'Due'){
-                        $('#due_sales_info_row').addClass('d-flex').removeClass('d-none');
-                    }else{
-                        $('#due_sales_info_row').hide('fast').removeClass('d-flex');
-                    }
-
-                    if(trx_type == 'Mobile Banking'){
-                        $('#transaction_id_row').addClass('d-flex').removeClass('d-none');
-                    }else{
-                        $('#transaction_id_row').hide('fast').removeClass('d-flex');
-                    }
-
-                });
-
-                $('#new_customer').on('change', function(e){
-                    var isChecked = $(this).prop('checked');
-
-                    if(isChecked){
-                        $('#old-customer-fields').hide('fast');
-                        $('#new-customer-fields').show('fast').removeClass('d-none');
-                    }else{
-                        $('#new-customer-fields').hide('fast');
-                        $('#old-customer-fields').show('fast');
-                    }
-                })
-
                 $('#product_id').on('change', function(e){
                     var product_id = e.target.value;
                     var route = "{{ route('product.get', 'id') }}";
@@ -293,7 +283,45 @@
                         }
                     })
 
-                })
+                });
+
+                function showCustomerFields(ele){
+                    var isChecked = $(ele).prop('checked');
+                    if(isChecked){
+                        $('#old-customer-fields').hide('fast');
+                        $('#new-customer-fields').show('fast').removeClass('d-none');
+                    }else{
+                        $('#new-customer-fields').hide('fast');
+                        $('#old-customer-fields').show('fast');
+                    }
+                }
+
+                function showDueFields(ele){
+                    var trx_type = $(ele).val();
+
+                    if(trx_type == 'Due'){
+                        $('#due_sales_info_row').addClass('d-flex').removeClass('d-none');
+                    }else{
+                        $('#due_sales_info_row').hide('fast').removeClass('d-flex');
+                    }
+
+                    if(trx_type == 'Mobile Banking'){
+                        $('#transaction_id_row').addClass('d-flex').removeClass('d-none');
+                    }else{
+                        $('#transaction_id_row').hide('fast').removeClass('d-flex');
+                    }
+                }
+
+                showCustomerFields('#is_new_customer');
+                showDueFields("#transaction_type");
+
+                $('#transaction_type').on('change', function(e){
+                   showDueFields("#transaction_type");
+                });
+
+                $('#is_new_customer').on('change', function(e){
+                    showCustomerFields('#is_new_customer');
+                });
 
                 $('#quantity').on('change', function(e){
                     var quantity = e.target.value;
@@ -301,6 +329,32 @@
                     var total_amount = quantity * sales_price;
                     
                     $('#total_amount').val(total_amount);
+                });
+
+                $("#paid_amount").on('change', function (e) {
+
+                    var paid_amount = e.target.value;
+                    var total_amount = $('#total_amount').val();
+
+                    if (paid_amount > total_amount) {
+
+                        Swal.fire({
+                            'title': 'Wrong Input!',
+                            'text': 'You enter greater amount than total amount',
+                            'icon': 'info',
+                        });
+
+                        $(this).val('');
+                        $("#due_amount").val('');
+
+                    }else{
+                        var trx_type = $("#transaction_type option:selected").val();
+                        if(trx_type == 'Due'){
+                            var due_amount = total_amount - paid_amount;
+                            $("#due_amount").val(due_amount);
+                        }
+                    }
+
                 })
             });
 

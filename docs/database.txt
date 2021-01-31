@@ -87,18 +87,34 @@ id  name            slug            parent_id
 =================================
 
 + id
-+ product_id
 + user_id
 + customer_id
-
-+ quantity
-+ unit_price
-+ total_amount
-
 + sales_type (Cash, Cheque, Due, Mobile Banking)
+
+
++ gross_amount // 1200
++ discount_amount // 100
++ net_amount // 1100
 
 + paid_amount
 + due_amount
+
 + pay_back_date
 + transaction_id
 
+
++ Table Name: product_sale (Junction Table) / (Intermediate Table) (Pivot Table)
+=====================================================================================
++ id
++ product_id
++ sale_id
++ sale_price
++ quantity
++ amount
+
+id sale_id product_id sale_price quantity amount
+1     1       2          4         10        40 
+2     1       5
+3     1       8
+
+1200
