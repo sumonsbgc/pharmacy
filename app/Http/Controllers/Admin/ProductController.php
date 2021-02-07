@@ -25,9 +25,9 @@ class ProductController extends Controller
         return view('admin.products.create', compact('brands', 'categories'));
     }
 
-    public function getProduct($product_id){
-        $product = Product::findOrFail($product_id);
-        
+    public function getProduct($product_id){        
+        // $product_id = explode(',', $product_id); // string to array
+        $product = Product::findOrFail($product_id); // Select * From `products` Where `id` IN (1,2,3)
         return response()->json(['status' => 'success', 'product' => $product]);
     }
 

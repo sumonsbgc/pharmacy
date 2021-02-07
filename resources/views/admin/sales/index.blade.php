@@ -47,15 +47,31 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($sales as $sale)
-                                    {{ dd($sale) }}
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $sale->product->name }}</td>
+                                            <td>
+                                                @foreach ($sale->products as $product)
+                                                {{ $product->name.", " }} <br>
+                                                @endforeach
+                                            </td>
                                             <td>{{ $sale->customer->name }}</td>
-                                            <td>{{ $sale->total_quantity }}</td>
-                                            <td>{{ $sale->sale_price }}</td>
-                                            <td>{{ $sale->total_amount }}</td>
-                                            <td>{{ $sale->transaction_type }}</td>
+                                            <td>
+                                                @foreach ($sale->products as $product)
+                                                {{ $product->pivot->quantity.", " }} <br>
+                                                @endforeach
+                                            </td>
+
+                                            <td>
+                                                @foreach ($sale->products as $product)
+                                                {{ $product->pivot->sales_price.", " }} <br>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($sale->products as $product)
+                                                {{ $product->pivot->total_amount.", " }} <br>
+                                                @endforeach
+                                            </td>
+                                            <td>{{ $sale->sales_type }}</td>
                                             <td>{{ $sale->paid_amount }}</td>
                                             <td>{{ $sale->due_amount }}</td>
                                             <td>{{ $sale->created_at }}</td>

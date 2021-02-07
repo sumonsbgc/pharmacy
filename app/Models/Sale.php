@@ -26,7 +26,7 @@ class Sale extends Model
     ];
 
     public function products(){
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('quantity', 'sales_price', 'total_amount');
     }
 
     public function customer(){

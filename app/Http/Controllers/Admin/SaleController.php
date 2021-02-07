@@ -8,12 +8,13 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class SaleController extends Controller
 {
     public function index(){
-        $sales = Sale::all();
+        $sales = Sale::with('products','customer')->get();
         return view('admin.sales.index', compact('sales'));
     }
     public function create(){        
@@ -24,6 +25,7 @@ class SaleController extends Controller
     }
 
     public function store(Request $request){
+        // dd($request->all());
         $valid = Validator::make($request->all(), [
             'product_id'       => ['required'],
             'customer_id'      => ['required_without:is_new_customer'],
@@ -43,34 +45,41 @@ class SaleController extends Controller
             return back()->withErrors($valid)->withInput();
         }
 
-
         if(isset($request->is_new_customer)){
             $customer = new Customer();
             $customer->name = $request->customer_name;
             $customer->mobile = $request->customer_mobile;
             $customer->address = $request->customer_address;
-
             $customer->save();
         }
 
+        DB::beginTransaction();
         $sale = new Sale();        
-        $sale->user_id = Auth::user()->id;
-        $sale->product_id = $request->product_id;
-        
-        $sale->customer_id = $request->customer_id ?? $customer->id;
-
-        $sale->quantity = $request->quantity;
-        $sale->sales_price = $request->sales_price;
-        $sale->total_amount = $request->total_amount;
-        $sale->transaction_type = $request->transaction_type;
+        $sale->user_id = Auth::user()->id;        
+        $sale->customer_id = $request->customer_id ?? $customer->id;        
+        $sale->sales_type = $request->transaction_type;
+        $sale->gross_amount = $request->gross_amount;
+        $sale->discount_amount = $request->total_discount;
+        $sale->net_amount = $request->net_amount;
         $sale->paid_amount = $request->paid_amount;
         $sale->due_amount = $request->due_amount;
         $sale->pay_back_date = $request->pay_back_date;
         $sale->transaction_id = $request->transaction_id;
-
         $sale->save();
 
-        return redirect()->back()->with(['status' => 'success', 'message' => 'Sales Record has been created successfully']);
+        foreach($request->product_id as $key => $value){
+            $sale->products()->attach($value,
+            [
+                'quantity' => $request->quantity[$key], 
+                'sales_price' => $request->sales_price[$key], 
+                'total_amount' => $request->total_amount[$key],
+            ]);
+        }
+
+        DB::commit();
+
+
+        return redirect()->route('admin.sales.index')->with(['status' => 'success', 'message' => 'Sales Record has been created successfully']);
     }
 
     
