@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'user_id',
         'product_id',
@@ -36,17 +37,11 @@ class Sale extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function invoice(){
+        return $this->hasOne(Invoice::class);
+    }
 }
-
-
-
-
-// One To One  => hasOne() => belongsTo()
-
-// One To Many => hasMany() => belongsTo()
-
-// Many To Many => belongsToMany() => belongsToMany()
-
 
 
 

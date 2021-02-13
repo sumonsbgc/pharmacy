@@ -34,3 +34,31 @@
     padding-left: 40px;
     padding-right: 40px;
 }
+
+.invoice-row{
+    width: 100%;
+    display: flex;
+}
+
+.invoice-row > *{
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.invoice-col-6{
+    width: 50%;
+    flex-basis: 50%;
+}
+
+.invoice-col-12{
+    width: 100%;
+    flex-basis: 100%;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.text-center{
+    text-align: center;
+}

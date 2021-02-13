@@ -51,30 +51,46 @@
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>
                                                 @foreach ($sale->products as $product)
+                                                @if(!$loop->last)
                                                 {{ $product->name.", " }} <br>
+                                                @else
+                                                {{ $product->name }} <br>
+                                                @endif
                                                 @endforeach
                                             </td>
                                             <td>{{ $sale->customer->name }}</td>
                                             <td>
                                                 @foreach ($sale->products as $product)
+                                                @if (!$loop->last)
                                                 {{ $product->pivot->quantity.", " }} <br>
+                                                @else
+                                                {{ $product->pivot->quantity }} <br>
+                                                @endif
                                                 @endforeach
                                             </td>
 
                                             <td>
                                                 @foreach ($sale->products as $product)
-                                                {{ $product->pivot->sales_price.", " }} <br>
+                                                @if (!$loop->last)
+                                                {{ $product->pivot->sales_price.", " }} <br>                                                    
+                                                @else
+                                                {{ $product->pivot->sales_price }} <br>
+                                                @endif
                                                 @endforeach
                                             </td>
                                             <td>
                                                 @foreach ($sale->products as $product)
-                                                {{ $product->pivot->total_amount.", " }} <br>
+                                                    @if (!$loop->last)
+                                                    {{ $product->pivot->total_amount.", " }} <br>
+                                                    @else
+                                                    {{ $product->pivot->total_amount }} <br>
+                                                    @endif
                                                 @endforeach
                                             </td>
                                             <td>{{ $sale->sales_type }}</td>
                                             <td>{{ $sale->paid_amount }}</td>
                                             <td>{{ $sale->due_amount }}</td>
-                                            <td>{{ $sale->created_at }}</td>
+                                            <td>{{ $sale->created_at->format('Y-m-d') }}</td>
                                             <td width="300px">
                                                 <a href="{{ route('admin.sale.edit', $sale->id) }}" class="btn btn-info btn-edit" title="EDIT"><i class="fas fa-edit"></i></a>                                                                                            
                                                 <a href="{{ route('admin.sale.delete', $sale->id) }}" class="btn btn-danger btn-delete" title="DELETE" onclick="event.preventDefault(); document.getElementById('delete-sale-{{$sale->id}}').submit();">

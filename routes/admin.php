@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\Admin\LoginController;
 use App\Http\Controllers\Auth\Admin\RegisterController;
+use App\Models\Sale;
 
 Route::prefix("admin")->group(function(){
 
@@ -114,7 +115,11 @@ Route::prefix('admin')->group(function(){
     Route::get('customer/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
     Route::put('customer/update/{id}', [CustomerController::class, 'update'])->name('admin.customer.update');
     Route::delete('customer/delete/{id}', [CustomerController::class, 'delete'])->name('admin.customer.delete');
-    
+
+    Route::get('invoice', function(){
+        $sale = Sale::findOrFail(3);
+        return view('admin.invoices.saleInvoice', compact('sale'));
+    });
 
     
 });
