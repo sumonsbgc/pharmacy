@@ -38,14 +38,21 @@ Pharmacy:
 
 Remaining Task:
 
-1) Sales Management ()
+1) Sales Management () => Done
 
-2) Customer Management ()
-3) Reciept Management ()
-4) Due Management ()
-11) Expense Management()
+2) Customer Management () => done
+11) Expense Management() => done
+
+3) Reciept Management () => doing
++ id
++ customer_id
++ sale_id
++ amount
+4) Due Management () => doing
+
 
 3) Settings Management ()
+
 7) Report Management ()
 
 1) Authentication ()  // Something left

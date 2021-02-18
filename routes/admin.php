@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SaleController;
@@ -112,9 +113,19 @@ Route::prefix('admin')->group(function(){
     Route::get('customers', [CustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
     Route::post('customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
-    Route::get('customer/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
-    Route::put('customer/update/{id}', [CustomerController::class, 'update'])->name('admin.customer.update');
-    Route::delete('customer/delete/{id}', [CustomerController::class, 'delete'])->name('admin.customer.delete');
+    Route::get('customer/edit/{customer}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
+    Route::put('customer/update/{customer}', [CustomerController::class, 'update'])->name('admin.customer.update');
+    Route::delete('customer/delete/{customer}', [CustomerController::class, 'delete'])->name('admin.customer.delete');
+
+
+    // Expense Route
+    Route::get('expenses', [ExpenseController::class, 'index'])->name('admin.expenses.index');
+    Route::get('expense/create', [ExpenseController::class, 'create'])->name('admin.expense.create');
+    Route::post('expense/store', [ExpenseController::class, 'store'])->name('admin.expense.store');
+    Route::get('expense/edit/{expense}', [ExpenseController::class, 'edit'])->name('admin.expense.edit');
+    Route::put('expense/update/{expense}', [ExpenseController::class, 'update'])->name('admin.expense.update');
+    Route::delete('expense/delete/{expense}', [ExpenseController::class, 'delete'])->name('admin.expense.delete');
+
 
     Route::get('invoice', function(){
         $sale = Sale::findOrFail(3);

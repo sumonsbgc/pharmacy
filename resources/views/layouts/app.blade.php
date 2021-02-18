@@ -299,7 +299,7 @@
                                 </li>
                             </ul>
                         </li>
-
+                        {{-- Suppliers --}}
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -324,7 +324,57 @@
                                 </li>
                             </ul>
                         </li>
+                        {{-- Customers --}}
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Customers
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
 
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.customers.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Customers
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.customer.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Add New Customer
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- Expenses --}}
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Expenses
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.expenses.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Expenses
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.expense.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Add New Expense
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- Users --}}
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
