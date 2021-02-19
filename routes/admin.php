@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -125,6 +127,18 @@ Route::prefix('admin')->group(function(){
     Route::get('expense/edit/{expense}', [ExpenseController::class, 'edit'])->name('admin.expense.edit');
     Route::put('expense/update/{expense}', [ExpenseController::class, 'update'])->name('admin.expense.update');
     Route::delete('expense/delete/{expense}', [ExpenseController::class, 'delete'])->name('admin.expense.delete');
+
+    // Receipt Route
+    Route::get('receipts', [ReceiptController::class, 'index'])->name('admin.receipts.index');
+    Route::get('receipt/create', [ReceiptController::class, 'create'])->name('admin.receipt.create');
+    Route::post('receipt/store', [ReceiptController::class, 'store'])->name('admin.receipt.store');
+    Route::get('receipt/edit/{receipt}', [ReceiptController::class, 'edit'])->name('admin.receipt.edit');
+    Route::put('receipt/update/{receipt}', [ReceiptController::class, 'update'])->name('admin.receipt.update');
+    Route::delete('receipt/delete/{receipt}', [ReceiptController::class, 'delete'])->name('admin.receipt.delete');
+
+    // Settings Route
+    Route::get('settings', [SettingController::class, 'index'])->name('admin.settings.index');
+    Route::post('setting/save', [SettingController::class, 'save'])->name('admin.settings.save');
 
 
     Route::get('invoice', function(){

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReceiptsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateReceiptsTable extends Migration
      */
     public function up()
     {
-        Schema::create('receipts', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers');
-            $table->string('receipt_title', 70);
-            $table->decimal('amount', 8, 2);
+            $table->string('key', 70)->index('key');
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateReceiptsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('receipts');
+        Schema::dropIfExists('settings');
     }
 }
