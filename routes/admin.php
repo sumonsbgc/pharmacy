@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
@@ -33,7 +34,9 @@ Route::prefix("admin")->group(function(){
 });
 
 Route::prefix('admin')->group(function(){
-    Route::view('dashboard', 'admin.dashboard')->name('admin.dashboard');
+
+    Route::get('dashboard', [DashboardController::class, 'home'])->name('admin.dashboard');
+    
     // All User Route
     Route::get('users', [UserController::class, 'index'])->name('admin.users');
     Route::get('user/create', [UserController::class, 'create'])->name('admin.user.create');

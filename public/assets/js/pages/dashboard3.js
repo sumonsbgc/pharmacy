@@ -51,14 +51,13 @@ $(function () {
           },
           ticks    : $.extend({
             beginAtZero: true,
-
             // Include a dollar sign in the ticks
             callback: function (value, index, values) {
               if (value >= 1000) {
                 value /= 1000
                 value += 'k'
               }
-              return '$' + value
+              return '$ ' + value
             }
           }, ticksStyle)
         }],

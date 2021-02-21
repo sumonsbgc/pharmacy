@@ -15,8 +15,13 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sale_id')->constrained('sales');
             $table->string('invoice_id', 15);
+            
+
+            
+            $table->foreignId('sale_id')->constrained('sales');
+
+
             $table->timestamps();
         });
     }
