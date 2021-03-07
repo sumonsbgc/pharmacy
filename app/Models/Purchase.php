@@ -39,4 +39,53 @@ class Purchase extends Model
         return $this->belongsTo(Product::class); // Gmax 500mg
     }
 
+    public function getFilterData($request){
+        // dd($request->all());
+        $query = $this->query(); // SELECT * FROM `purchases` WHERE product_id = 1 AND WHERE `purchase_date` = from AND WHERE AND 
+
+        if(!empty($request->product_id)){
+            $query->where('product_id', $request->product_id);
+        }
+
+        if(!empty($request->from) && !empty($request->to)){
+            $query->whereBetween('purchase_date', [$request->from, $request->to]);
+        }elseif(!empty($request->from)){
+            $query->where('purchase_date', $request->from);
+        }
+        
+        if(!empty($request->supplier_id)){
+            $query->where('supplier_id', $request->supplier_id);
+        }
+        
+        if(!empty($request->status)){
+            $query->where('transaction_type', $request->status);
+        }
+
+        if(!empty($request->brand_id)){
+            $productIdList = [];
+            $brand = Brand::findOrFail($request->brand_id);
+            $productIdList = $brand->products->map(function($product){
+                return $product->id;
+            });
+
+            if(is_array($productIdList->all())){
+                $query->whereIn('product_id', $productIdList->all());
+            }
+        }
+
+        if(!empty($request->category_id)){
+            $productIdList = [];
+
+            $category = Category::findOrFail($request->category_id);
+            $productIdList = $category->products->map(function($product) {
+                return $product->id;
+            });
+            
+            if(is_array($productIdList->all())){
+                $query->whereIn('product_id', $productIdList->all());
+            }
+        }
+
+        return $query->get();
+    }
 }

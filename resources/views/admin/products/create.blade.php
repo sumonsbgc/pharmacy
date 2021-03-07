@@ -43,7 +43,7 @@
                             <form action="{{ route('admin.product.store') }}" class="" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-9">
                                         <label for="name" class="form-label">Product Name <small class="text-danger">*</small></label>
                                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="e.g: Gmax" value="{{ old('name') }}" required>
                                         @error('name')
@@ -51,6 +51,10 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                                        <input type="text" name="expiry_date" class="form-control datepicker @error('expiry_date') is-invalid @enderror" id="expiry_date" placeholder="DD-MM-YYYY" value="{{ old('expiry_date') }}">
                                     </div>
                                 </div>
 

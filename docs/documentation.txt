@@ -39,19 +39,46 @@ Pharmacy:
 Remaining Task:
 
 1) Sales Management () => Done
-
 2) Customer Management () => done
 11) Expense Management() => done
-
-
 3) Reciept Management () => done
-3) Settings Management () => doing
-    
+3) Settings Management () => done
+4) Due Management () => done
 
 
-
-
-4) Due Management () => doing
 7) Report Management ()
+Reports:
+    - Stock Report
+        - As on => Current Stock
+        - Periodical Stock ()
 
-1) Authentication ()  // Something left
+    - Expense Report 
+
+        - Daily Expense
+        - Monthly Expense
+        - Yearly Expense
+
+        - Name of Account Base
+    
+    Account Name,  
+
+    - Sales Report (Count of Sale and Total Amount for specific time)
+        - Daily Sales
+        - Monthly Sales
+        - Yearly Sales
+        - Name Of Product 
+        - Cash Sale
+        - Outstanding Sale
+
+    - Purchase Report
+        - Daily Purchase
+        - Monthly Purchase
+        - Yearly Purchase
+        - Name Of Product 
+        - Cash Purchase
+        - Outstanding Purchase
+        - Supplier
+        - Brand Base
+        - Category Base
+    
+8) Authentication ()  // Something left

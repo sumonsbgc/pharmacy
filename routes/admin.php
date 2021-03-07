@@ -1,23 +1,25 @@
 <?php
 
-use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\AttributeValueController;
+use App\Models\Sale;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\ReceiptController;
-use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\Admin\LoginController;
+
 use App\Http\Controllers\Auth\Admin\RegisterController;
-use App\Models\Sale;
+use App\Http\Controllers\Admin\AttributeValueController;
+use App\Http\Controllers\Admin\ReportController;
 
 Route::prefix("admin")->group(function(){
 
@@ -143,10 +145,17 @@ Route::prefix('admin')->group(function(){
     Route::get('settings', [SettingController::class, 'index'])->name('admin.settings.index');
     Route::post('setting/save', [SettingController::class, 'save'])->name('admin.settings.save');
 
+    // All Reports Route
+    Route::match(['get', 'post'], 'report/stocks', [ReportController::class, 'stock'])->name('admin.report.stock');
+    Route::match(['get', 'post'], 'report/expense', [ReportController::class, 'expense'])->name('admin.report.expense');
+    Route::match(['get', 'post'], 'report/sales', [ReportController::class, 'sales'])->name('admin.report.sales');
+    Route::match(['get', 'post'], 'report/purchase', [ReportController::class, 'purchase'])->name('admin.report.purchase');
+
 
     Route::get('invoice', function(){
         $sale = Sale::findOrFail(3);
-        return view('admin.invoices.saleInvoice', compact('sale'));
+        $invoice_number = '121232389';
+        return view('admin.invoices.invoice', compact('sale', 'invoice_number'));
     });
 
     

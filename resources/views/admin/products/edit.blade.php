@@ -44,7 +44,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-9">
                                         <label for="name" class="form-label">Product Name <small class="text-danger">*</small></label>
                                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="e.g: Gmax" value="{{ old('name', $product->name) }}" required>
                                         @error('name')
@@ -52,6 +52,10 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="expiry_date" class="form-label">Expiry Date</label>
+                                        <input type="text" name="expiry_date" class="form-control datepicker @error('expiry_date') is-invalid @enderror" id="expiry_date" placeholder="DD-MM-YYYY" value="{{ old('expiry_date', $product->expiry_date) }}">
                                     </div>
                                 </div>
 
@@ -126,7 +130,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="total_price" class="form-label">Total Price <small class="text-danger">*</small></label>
-                                        <input type="text" name="total_price" class="form-control @error('total_price') is-invalid @enderror" id="total_price" placeholder="e.g: Total Price" value="{{ old('total_price', $product->total_price) }}" required>
+                                        <input type="text" name="total_price" class="form-control @error('total_price') is-invalid @enderror" id="total_price" placeholder="e.g: Total Price" value="{{ old('total_price', $product->sales_price * $product->total_quantity) }}" required>
                                         @error("total_price")
                                         <div class="invalid-feedback">
                                             {{ $message }}

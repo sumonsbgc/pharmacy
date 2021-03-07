@@ -54,7 +54,7 @@
                 <p>Ref. No</p>
             </div>
             <div class="invoice-col-6" style="text-align: right">
-                <p>Dated: <strong>{{ date('j-M-Y', strtotime($sale->created_at)) }}</strong></p>
+                <p>Dated: <strong>{{ date('j-M-Y', strtotime( $sale->created_at )) }}</strong></p>
             </div>
         </div>
 

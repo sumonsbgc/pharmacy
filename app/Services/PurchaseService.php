@@ -17,11 +17,11 @@ class PurchaseService {
     }
 
     public function getTotalMonthlyPurchase($month){
+        return $this->purchase->whereMonth('created_at', $month)->get()->sum('total_amount');
+    }
 
-        return $this->purchase->whereMonth('created_at', $month)->get()->reduce(function($carry, $sale) { 
-            return $carry += $sale->total_amount;
-        });
-        
+    public function getTotalPurchase($month){
+        return $this->purchase->whereMonth('created_at', $month)->get()->count();
     }
 
     public function getTwelveMonthsPurchaseAmount(){        
@@ -29,14 +29,6 @@ class PurchaseService {
         return collect($months)->map(function($month){
             return $this->getTotalMonthlyPurchase($month);
         });
-
-        // $purchase_amounts = [];
-
-        // foreach($months as $month){
-        //     array_push($purchase_amounts, $this->getTotalMonthlyPurchase($month));
-        // }
-
-        // return $purchase_amounts;
     }
 
 }

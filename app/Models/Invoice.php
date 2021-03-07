@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'sale_id',
         'invoice_id'
@@ -16,4 +17,7 @@ class Invoice extends Model
     public function sale(){
         return $this->belongsTo(Sale::class);
     }
+    
+    
+    
 }

@@ -30,6 +30,9 @@ class CreateProductsTable extends Migration
             $table->string('thumbnail', 150)->nullable();
 
             $table->enum('status', ['Publish', 'Pending', 'Draft'])->nullable()->default('pending');
+            
+            $table->timestamp('expiry_date')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

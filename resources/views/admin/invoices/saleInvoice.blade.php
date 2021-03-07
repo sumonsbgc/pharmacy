@@ -1,9 +1,8 @@
 @include('admin.invoices.header')
-<?php 
-use NumberToWords\NumberToWords;
-$numberToWords = new NumberToWords();
-$numberTransformer = $numberToWords->getNumberTransformer('en');
-
+<?php
+    use NumberToWords\NumberToWords;
+    $numberToWords = new NumberToWords();
+    $numberTransformer = $numberToWords->getNumberTransformer('en');
 ?>
 <div class="invoice-row" style="margin-bottom: 1rem">
     <div class="invoice-col-6">
@@ -98,4 +97,5 @@ $numberTransformer = $numberToWords->getNumberTransformer('en');
         E. & O. E.
     </div>
 </div>
+
 @include('admin.invoices.footer')

@@ -8,13 +8,14 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::all();
+        $products = Product::with('category', 'brand')->get();
         $trashedProducts = Product::onlyTrashed()->get();
         return view('admin.products.index', compact('products', 'trashedProducts'));
     }
@@ -63,6 +64,7 @@ class ProductController extends Controller
         $product->status = $request->status;
 
         $product->description = $request->description ?? '';
+        $product->expiry_date = Carbon::create($request->expiry_date)->format('Y-m-d') ?? null;
 
         $product->save();
 
@@ -110,6 +112,7 @@ class ProductController extends Controller
         $product->status = $request->status;
 
         $product->description = $request->description ?? '';
+        $product->expiry_date = Carbon::create($request->expiry_date)->format('Y-m-d') ?? null;
 
         $product->save();
 

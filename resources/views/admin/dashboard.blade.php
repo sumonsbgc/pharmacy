@@ -174,6 +174,40 @@
         </div>
       </div>
 
+      {{-- Less Stock Product Card --}}
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-primary"><strong>Less Stock Products</strong></div>
+            <div class="card-body p-0">
+              <table class="table table-bordered table-striped table-dark">
+                <tr>
+                  <th>Sl</th>
+                  <th>Product Name</th>
+                  <th>Product Brand</th>
+                  <th>Product Category</th>
+                  <th>Stock Quantity</th>
+                </tr>
+                @forelse ($lessStockProducts as $product)
+                  <tr>
+                    <td>{{ $loop->index + 1 }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->brand->name }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td>{{ $product->total_quantity }}</td>
+                  </tr>                    
+                @empty
+                    <tr>
+                      <td colspan="5" align="center">No Products Found</td>
+                    </tr>
+                @endforelse
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->
   </section>

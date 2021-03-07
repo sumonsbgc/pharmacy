@@ -126,10 +126,10 @@
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
+            <!-- Brand Logo -->            
             <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                <img src="{{ Storage::url($setting->get('logo')) }}" alt="Pharmacy Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">{{ $setting->get('name') }}</span>
+                <img src="{{ Storage::url(config()->get('settings.logo')) }}" alt="Pharmacy Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">{{ config()->get('settings.name') }}</span>
             </a>
 
             <!-- Sidebar -->
@@ -374,7 +374,7 @@
                                 </li>
                             </ul>
                         </li>
-
+                        {{-- Receipt Management --}}
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -399,6 +399,44 @@
                                 </li>
                             </ul>
                         </li>
+                        {{-- Reports Management --}}
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-chart-bar"></i>
+                                <p>
+                                    Report Management
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.report.stock') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Stocks Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.report.expense') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Expenses Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.report.sales') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Sales Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.report.purchase') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Purchases Management
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
 
                         {{-- Users --}}
                         <li class="nav-item has-treeview">
@@ -564,7 +602,25 @@
                 locale: {
                     format: 'DD-MM-YYYY'
                 }
-            })
+            });
+            
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                timePicker: false,
+                autoUpdateInput: false,
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }                
+            });
+
+            $('.datetimepicker').daterangepicker({
+                singleDatePicker: true,
+                timePicker: true,
+                autoUpdateInput: false,
+                locale: {
+                    format: 'DD-MM-YYYY H:i'
+                }                
+            });
         });
     </script>
 

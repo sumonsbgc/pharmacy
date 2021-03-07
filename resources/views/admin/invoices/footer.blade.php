@@ -25,7 +25,7 @@
 
         <div class="invoice-row" style="margin-top: 1.5rem">
             <div class="invoice-col-12 text-right">
-                <p>Printed On: <strong>{{ date('j-M-Y', strtotime($sale->created_at)) }} at {{ date('H:i', strtotime($sale->created_at)) }}</strong></p>
+                <p>Printed On: <strong>{{ date('j-M-Y') }} at {{ date('H:i') }}</strong></p>
             </div>
         </div>
 
