@@ -49,6 +49,10 @@ Remaining Task:
 7) Report Management ()
 Reports:
     - Stock Report
+        - Product Base
+        - Supplier
+        - Brand Base
+        - Category Base
         - As on => Current Stock
         - Periodical Stock ()
 
