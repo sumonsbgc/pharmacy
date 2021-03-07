@@ -91,6 +91,6 @@ class Product extends Model
             });            
         }
 
-        return $query->get()->dd();
+        return $query->get();
     }
 }
