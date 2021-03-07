@@ -86,7 +86,7 @@ class UserController extends Controller
             "username"   => ['required', 'max:50'],
             "email"      => ['required', 'max:70'],
             "mobile"     => ['nullable', 'max:15'],
-            "password"   => ['required', 'max:170'],
+            // "password"   => ['required', 'max:170'],
             "user_type"  => ['required', 'string', 'max:20'],
             "birthdate"  => ['nullable', 'date'],
             "gender"     => ['nullable', 'string', 'max:11'],
@@ -109,7 +109,7 @@ class UserController extends Controller
 
         $user->email = $request->email ?? '';
         $user->mobile = $request->mobile ?? '';
-        $user->password = bcrypt($request->password) ?? '';
+        // $user->password = bcrypt($request->password) ?? '';
 
         $user->user_type = $request->user_type ?? '';
         $user->birthdate = Carbon::create($request->birthdate)->format('Y-m-d') ?? '';

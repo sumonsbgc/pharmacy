@@ -117,7 +117,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <label for="password" class="form-label">Password <small class="text-danger">*</small></label>
                                         <input type="text" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="e.g: ******" value="" required>
                                         @error('password')
@@ -125,7 +125,7 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col-md-4">
