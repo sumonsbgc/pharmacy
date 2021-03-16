@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->string('barcode', 50)->nullable();
 
             $table->integer('total_quantity');
-            $table->float('sales_price');
+            $table->float('sales_price')->nullable();
 
             $table->text('description')->nullable();
             $table->string('thumbnail', 150)->nullable();

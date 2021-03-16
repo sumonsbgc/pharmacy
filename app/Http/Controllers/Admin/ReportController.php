@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Supplier;
 
@@ -57,7 +58,9 @@ class ReportController extends Controller
 
         return view('admin.reports.expenses', $data);
     }
+    
     public function purchase(Request $request){
+
         $data['products'] = Product::get();
         $data['suppliers'] = Supplier::get();
         $data['brands'] = Brand::get();
@@ -80,5 +83,29 @@ class ReportController extends Controller
 
         return view('admin.reports.purchases', $data);
     }
-    public function sales(){}
+
+    public function sales(Request $request){
+
+        $data['products'] = Product::get();
+        $data['customers'] = Customer::get();
+        $data['brands'] = Brand::get();
+        $data['categories'] = Category::get();
+
+        if($request->isMethod('post') && $request->get('search') === 'Search'){
+            $data['sales'] = (new Sale())->getFilterData($request);
+        
+            $data['from'] = $request->from;
+            $data['to'] = $request->to;
+            $data['product_id'] = $request->product_id;
+            $data['customer_id'] = $request->customer_id;
+            $data['oldStatus'] = $request->status;
+            $data['brand_id'] = $request->brand_id;
+            $data['category_id'] = $request->category_id;
+
+        }elseif($request->isMethod('get') || $request->get('clear') === 'Clear'){
+            $data['sales'] = Sale::orderBy('updated_at', 'desc')->get();
+        }
+
+        return view('admin.reports.sales', $data);
+    }
 }

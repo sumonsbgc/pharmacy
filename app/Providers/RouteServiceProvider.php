@@ -23,8 +23,8 @@ class RouteServiceProvider extends ServiceProvider
     public const ADMIN_LOGIN = 'admin/login';
 
     // Employee Constants
-    public const EMPLOYEE_DASHBOARD = '/dashboard';
-    public const EMPLOYEE_LOGIN = '/login';
+    public const USER_DASHBOARD = 'user/dashboard';
+    public const USER_LOGIN = 'user/login';
 
     /**
      * The controller namespace for the application.

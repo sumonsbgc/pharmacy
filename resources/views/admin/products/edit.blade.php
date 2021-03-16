@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="row mt-4">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="brand" class="form-label">Brand <small class="text-danger">*</small></label>
                                         <select name="brand" id="brand" class="custom-select @error('brand') is-invalid @enderror" required>
                                             <option value="">Please Select brand</option>
@@ -74,7 +74,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="category" class="form-label">Category <small class="text-danger">*</small></label>
                                         <select name="category" id="category" class="custom-select @error('category') is-invalid @enderror" required>
                                             <option value="">Please Select Category</option>
@@ -88,7 +88,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="sku" class="form-label">Product Sku</label>
                                         <input type="text" name="sku" class="form-control @error('sku') is-invalid @enderror" id="sku" placeholder="e.g: AXIR343GE" value="{{ old('sku', $product->sku) }}">
                                         @error("sku")
@@ -97,9 +97,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label for="barcode" class="form-label">Product barcode</label>
                                         <input type="text" name="barcode" class="form-control @error('barcode') is-invalid @enderror" id="barcode" placeholder="e.g: barcode" value="{{ old('barcode', $product->barcode) }}">
                                         @error("barcode")
@@ -108,18 +106,10 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="unit" class="form-label">Product Unit</label>
-                                        <input type="text" name="unit" class="form-control @error('unit') is-invalid @enderror" id="unit" placeholder="e.g: unit" value="{{ old('unit', $product->unit) }}">
-                                        @error("unit")
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
                                 </div>
+
                                 <div class="row mt-4">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="total_quantity" class="form-label">Total Quantity <small class="text-danger">*</small></label>
                                         <input type="text" name="total_quantity" class="form-control @error('total_quantity') is-invalid @enderror" id="total_quantity" placeholder="e.g: Total Quantity" value="{{ old('total_quantity', $product->total_quantity) }}" required>
                                         @error("total_quantity")
@@ -128,28 +118,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="total_price" class="form-label">Total Price <small class="text-danger">*</small></label>
-                                        <input type="text" name="total_price" class="form-control @error('total_price') is-invalid @enderror" id="total_price" placeholder="e.g: Total Price" value="{{ old('total_price', $product->sales_price * $product->total_quantity) }}" required>
-                                        @error("total_price")
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="unit_price" class="form-label">Unit Price <small class="text-danger">*</small></label>
-                                        <input type="text" name="unit_price" class="form-control @error('unit_price') is-invalid @enderror" id="unit_price" placeholder="e.g: Unit Price" value="{{ old('unit_price', $product->unit_price) }}" required>
-                                        @error("unit_price")
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row mt-4">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="sales_price" class="form-label">Sales Price <small class="text-danger">*</small></label>
                                         <input type="text" name="sales_price" class="form-control @error('sales_price') is-invalid @enderror" id="sales_price" placeholder="e.g: Sale Price" value="{{ old('sales_price', $product->sales_price) }}" required>
                                         @error("sales_price")
@@ -158,7 +127,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="thumbnail" class="form-label">Product Thumbnail</label>
                                         <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" id="thumbnail">
                                         @error("thumbnail")
@@ -167,7 +136,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="status" class="form-label">Status <small class="text-danger">*</small></label>
                                         <?php $status = ['Pending', 'Draft', 'Publish']; ?>
                                         <select name="status" id="status" class="custom-select @error('status') is-invalid @enderror" required>

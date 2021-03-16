@@ -57,6 +57,20 @@
                                     </div>
                                 </div>
 
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <label for="name" class="form-label">Profit Margin</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="profit_margin" class="form-control @error('profit_margin') is-invalid @enderror" id="profit_margin" placeholder="e.g: 10%" value="{{ old('profit_margin', $option->get('profit_margin') ) }}">
+                                        @error('profit_margin')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="row mt-4">
                                     <div class="col-md-12 text-right">
                                         <input type="submit" name="save_settings" value="Save Settings" class="btn btn-primary" style="width: 200px;">

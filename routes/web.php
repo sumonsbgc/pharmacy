@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 require_once __DIR__.'/admin.php';
+require_once __DIR__.'/user.php';
 
 Auth::routes(['register' => true]);
 

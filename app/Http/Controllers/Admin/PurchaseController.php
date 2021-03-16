@@ -118,18 +118,27 @@ class PurchaseController extends Controller
         $purchase->due_paid_date = Carbon::create($request->due_paid_date)->format('Y-m-d');
         $purchase->description = $request->description;
         $purchase->purchase_date = Carbon::create($request->purchase_date)->format('Y-m-d');
+        
 
         if($purchase->save()){
-            $product = Product::findOrFail($request->product_id);
+            $product = Product::findOrFail($request->product_id);            
             $product->total_quantity = $product->total_quantity + $purchase->total_quantity;
+
+            if(!empty($request->unit_price)){
+                $sales_price = $request->unit_price + $request->unit_price * ( config()->get('profit_margin') / 100 );
+            }else{
+                $unit_price = $request->total_amount / $request->total_quantity;
+                $sales_price = $unit_price + $request->unit_price * ( config()->get('profit_margin') / 100 );
+            }
+            
+            $product->sales_price = $sales_price;
             $product->save();
         }
 
         return redirect()->route('admin.purchases.index')->with(['status' => 'success', 'message' => 'Purchase Record has been updated successfully']);
     }
 
-    public function delete($id){
-
+    public function delete($id){        
         if(5 !== Auth::user()->id){
             return redirect()->back()->with(['status' => 'error', 'message' => 'You can\'t delete this purchase.']);
         }

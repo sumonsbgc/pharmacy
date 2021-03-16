@@ -53,7 +53,7 @@ class Product extends Model
     }
 
     public function getStockData($filters){
-        $query = $this->query()->with('sales', 'purchases');
+        $query = $this->query();
 
         if(!empty($filters->product_id) && $filters->product_id[0] !== null){
             $query->whereIn('id', $filters->product_id);
@@ -80,17 +80,19 @@ class Product extends Model
         }
 
         if(!empty($filters->from) && !empty($filters->to)){
-            $query->orWhereHas('purchases', function($query) use($filters) {
-                $query->whereBetween('purchase_date', [Carbon::create($filters->from), Carbon::create($filters->to)]);
+            $query->with('sales', function($query) use($filters) {
+                $query->whereDate('product_sale.created_at', '>=', Carbon::create($filters->from))->whereDate('product_sale.created_at', '<=', Carbon::create($filters->to));
+            })->with('purchases', function($query) use($filters) {
+                $query->whereDate('purchases.purchase_date', '>=', Carbon::create($filters->from))->whereDate('purchases.purchase_date', '<=', Carbon::create($filters->to));
+            });
+        }elseif(!empty($filters->from)){
+            $query->with('sales', function($query) use($filters) {
+                $query->whereDate('product_sale.created_at', '>=', Carbon::create($filters->from));
+            })->with('purchases', function($query) use($filters) {
+                $query->whereDate('purchases.purchase_date', '>=', Carbon::create($filters->from));
             });
         }
-
-        if(!empty($filters->from) && !empty($filters->to)){
-            $query->orWhereHas('sales', function($query) use($filters) {
-                $query->whereBetween('product_sale.created_at', [Carbon::create($filters->from), Carbon::create($filters->to)]);
-            });            
-        }
-
+        
         return $query->get();
     }
 }

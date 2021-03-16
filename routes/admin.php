@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\ReportController;
 
 Route::prefix("admin")->group(function(){
 
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login'); // => admin/login
     Route::post('login', [LoginController::class, 'login']);
 
     // Logout Routes...
@@ -35,7 +35,7 @@ Route::prefix("admin")->group(function(){
 
 });
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function(){
 
     Route::get('dashboard', [DashboardController::class, 'home'])->name('admin.dashboard');
     
@@ -150,7 +150,6 @@ Route::prefix('admin')->group(function(){
     Route::match(['get', 'post'], 'report/expense', [ReportController::class, 'expense'])->name('admin.report.expense');
     Route::match(['get', 'post'], 'report/sales', [ReportController::class, 'sales'])->name('admin.report.sales');
     Route::match(['get', 'post'], 'report/purchase', [ReportController::class, 'purchase'])->name('admin.report.purchase');
-
 
     Route::get('invoice', function(){
         $sale = Sale::findOrFail(3);
