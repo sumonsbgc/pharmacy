@@ -94,7 +94,7 @@
                                 @empty(Auth::user()->profile_pic)
                                     <img class="img-circle elevation-2" src="{{ asset('assets/img/user4-128x128.jpg') }}" alt="User profile picture">
                                 @else
-                                    <img class="img-circle elevation-2" src="{{ asset('storage/'.Auth::user()->profile_pic) }}" alt="User profile picture">
+                                    <img class="img-circle elevation-2" src="{{ asset('storage/'.auth()->user()->profile_pic) }}" alt="User profile picture">
                                 @endempty
                             </div>
                             <div class="info">
@@ -105,8 +105,9 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         {{-- <a href="{{ route('admin.user.profile', Auth::user()->id ) }}" class="dropdown-item">My Profile</a> --}}
                         <div class="dropdown-divider"></div>
-                        <a href="{{ route('user.logout') }}" class="dropdown-item" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
+                        <a href="{{ route('user.logout') }}" 
+                           class="dropdown-item" 
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ 'Logout' }}
                         </a>
                         <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">

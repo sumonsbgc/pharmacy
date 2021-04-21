@@ -18,19 +18,19 @@ class SalesService{
     // }
 
     public function getTotalNetSalesAmount($month){
-        return $this->sale->whereMonth('created_at', $month)->get()->sum('net_amount');
+        return $this->sale->whereMonth('created_at', $month)->sum('net_amount');
     }
 
     public function getTotalDueSalesAmount($month){
-        return $this->sale->whereMonth('created_at', $month)->get()->sum('due_amount');
+        return $this->sale->whereMonth('created_at', $month)->sum('due_amount');
     }
 
     public function getTotalCashSalesAmount($month){
-        return $this->sale->whereMonth('created_at', $month)->get()->sum('paid_amount');
+        return $this->sale->whereMonth('created_at', $month)->sum('paid_amount');
     }
 
     public function getTotalSales($month){
-        return $this->sale->whereMonth('created_at', $month)->get()->count();
+        return $this->sale->whereMonth('created_at', $month)->count();
     }
     
     public function getTwelveMonthsSaleAmount(){
@@ -39,6 +39,11 @@ class SalesService{
         return collect($months)->map(function($month){
             return $this->getTotalNetSalesAmount($month);
         });
+
+
+
+
+        // return $this->sale->sum('net_amount');
     }
 
 }

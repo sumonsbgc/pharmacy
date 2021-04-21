@@ -216,9 +216,6 @@
 
 @push('script')
     <script>
-
-      console.log()
-
       var sales_purchase_context = document.getElementById('sales_purchase_comparison').getContext('2d');
       var ticksStyle = {
         fontColor: '#495057',
@@ -233,14 +230,14 @@
             {
               label: 'Sales',
               backgroundColor: '#007bff',
-              borderColor    : '#007bff',
-              data           :  @json($total_sales)
+              borderColor: '#007bff',
+              data: @json($total_sales)
             },
             {
               label: 'Purchase',
               backgroundColor: '#ced4da',
-              borderColor    : '#ced4da',
-              data           : @json($total_purchase)
+              borderColor: '#ced4da',
+              data: @json($total_purchase)
             }
           ]
         },

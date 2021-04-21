@@ -52,6 +52,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function hasRole($role){
+        if(!empty($role) && $this->user_type == $role){
+            return true;
+        }
+        return false;
+    }
 
     public function categories(){
         return $this->hasMany(Category::class);        

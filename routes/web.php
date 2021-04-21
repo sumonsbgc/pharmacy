@@ -18,10 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-require_once __DIR__.'/admin.php';
-require_once __DIR__.'/user.php';
+require_once dirname(__DIR__).'/routes/admin.php';
+require_once dirname(__DIR__).'/routes/user.php';
 
-Auth::routes(['register' => true]);
+// Auth::routes(['register' => true]);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

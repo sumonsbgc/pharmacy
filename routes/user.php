@@ -19,7 +19,7 @@ Route::prefix("user")->name('user.')->group(function(){
 
 });
 
-Route::prefix('user')->name('user.')->middleware('auth')->group(function(){
+Route::prefix('user')->name('user.')->middleware(['auth:employee', 'role:employee'])->group(function(){
     Route::get('dashboard', [DashboardController::class, 'home'])->name('dashboard');
 });
 
